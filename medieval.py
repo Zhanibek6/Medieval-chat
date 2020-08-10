@@ -13,26 +13,25 @@ class Medieval:
 
 
 	def translate(self, inp):
-		outStr = inp.lower()
+		result = inp.lower()
 
-		outStr = self.single_words(outStr)
+		result = self.single_words(result)
 
-		outStr = self.prepend_and_append(outStr)
+		result = self.prepend_and_append(result)
 
-		outStr = self.change_tags(outStr)
+		result = self.change_tags(result)
 
-		print(outStr)
+		print(result)
 
 
 	def single_words(self, inp):
-		transl = inp
+		translation = inp
 
 		data = self.data["single_replacements"]
 
 		for item in data:
-			transl = re.sub(rf"\b{item}\b", random.choice(data[item]), transl)
-			#transl = transl.replace(f" {item} ", random.choice(data[item]))
-		return transl
+			translation = re.sub(rf"\b{item}\b", random.choice(data[item]), translation)
+		return translation
 
 
 	def prepend_and_append(self, inp):
@@ -49,9 +48,9 @@ class Medieval:
 			appnd = " " + random.choice(appnd)
 		
 		
-		randPrep = random.choice(prep)
+		randomPrep = random.choice(prep)
 
-		return randPrep.replace("\n", " ") + inp.replace("\n", " ") + appnd
+		return randomPrep.replace("\n", " ") + inp.replace("\n", " ") + appnd
 
 
 	def punctuation(self, inp, ch):
@@ -62,12 +61,12 @@ class Medieval:
 
 
 	def change_tags(self, inp):
-		transl = inp
+		translation = inp
 		data = self.data["change_tags"]
 		for item in data:
-			transl = transl.replace(item, random.choice(data[item]))
+			translation = translation.replace(item, random.choice(data[item]))
 
-		return transl
+		return translation
 
 def main():
 	with open("dict.json", "r") as f:
@@ -75,7 +74,7 @@ def main():
 
 
 	data = json.loads(content)
-	med = Medieval(data)
+	medieval = Medieval(data)
 
 	text = input("Enter your text: ")
 	'''
@@ -87,7 +86,7 @@ def main():
 	]
 	for text in tests:
 	'''
-	med.translate(text)
+	medieval.translate(text)
 
 
 if __name__ == "__main__":
